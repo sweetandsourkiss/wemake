@@ -121,15 +121,18 @@ const menus = [
     ],
   },
 ];
+
 export default function Navigation() {
   return (
-    <nav className="flex px-20 h-16 items-center justify-between backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50">
+    <nav className="flex px-20 h-16 items-center backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50">
       <div className="flex items-center">
         <Link to="/" className="font-bold tracking-tighter text-lg">
           WeMake
         </Link>
       </div>
-      <Separator orientation="vertical" className="h-6 mx-4" />
+      <div className="h-6 mx-4">
+        <Separator orientation="vertical" />
+      </div>
       <NavigationMenu>
         <NavigationMenuList>
           {menus.map((menu) => (
@@ -137,7 +140,9 @@ export default function Navigation() {
               {menu.items ? (
                 <>
                   <Link to={menu.to}>
-                    <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="cursor-pointer">
+                      {menu.name}
+                    </NavigationMenuTrigger>
                   </Link>
                   <NavigationMenuContent>
                     <ul className="grid w-[600px] font-light gap-3 p-4 grid-cols-2">
@@ -146,26 +151,23 @@ export default function Navigation() {
                           key={item.name}
                           className={cn(
                             "select-none rounded-md transition-colors focus:bg-accent hover:bg-accent",
-                            item.to === "/products/promote" &&
-                              "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
-                            item.to === "/jobs/submit" &&
+                            (item.to === "/products/promote" ||
+                              item.to === "/jobs/submit") &&
                               "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20"
                           )}
                         >
                           <NavigationMenuLink asChild>
-                            <NavigationMenuLink asChild>
-                              <Link
-                                className="p-3 space-y-1 block leading-none no-underline outline-none"
-                                to={item.to}
-                              >
-                                <span className="text-sm font-medium leading-none">
-                                  {item.name}
-                                </span>
-                                <p className="text-sm text-muted-foreground">
-                                  {item.description}
-                                </p>
-                              </Link>
-                            </NavigationMenuLink>
+                            <Link
+                              className="p-3 space-y-1 block leading-none no-underline outline-none"
+                              to={item.to}
+                            >
+                              <span className="text-sm font-medium leading-none">
+                                {item.name}
+                              </span>
+                              <p className="text-sm text-muted-foreground">
+                                {item.description}
+                              </p>
+                            </Link>
                           </NavigationMenuLink>
                         </NavigationMenuItem>
                       ))}
