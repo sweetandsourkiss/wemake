@@ -33,6 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        {/* App or ErrorBoundary */}
         {children}
         <ScrollRestoration />
         <Scripts />
