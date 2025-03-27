@@ -7,7 +7,9 @@ import {
   NavigationMenuTrigger,
   NavigationMenuLink,
   NavigationMenuContent,
+  navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import { cn } from "~/lib/utils";
 
 const menus = [
   {
@@ -132,16 +134,49 @@ export default function Navigation() {
         <NavigationMenuList>
           {menus.map((menu) => (
             <NavigationMenuItem key={menu.name}>
-              <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                {menu.items?.map((item) => (
-                  <NavigationMenuItem key={item.name}>
-                    <NavigationMenuLink asChild>
-                      <Link to={item.to}>{item.name}</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuContent>
+              {menu.items ? (
+                <>
+                  <Link to={menu.to}>
+                    <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                  </Link>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[600px] font-light gap-3 p-4 grid-cols-2">
+                      {menu.items?.map((item) => (
+                        <NavigationMenuItem
+                          key={item.name}
+                          className={cn(
+                            "select-none rounded-md transition-colors focus:bg-accent hover:bg-accent",
+                            item.to === "/products/promote" &&
+                              "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
+                            item.to === "/jobs/submit" &&
+                              "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20"
+                          )}
+                        >
+                          <NavigationMenuLink asChild>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                className="p-3 space-y-1 block leading-none no-underline outline-none"
+                                to={item.to}
+                              >
+                                <span className="text-sm font-medium leading-none">
+                                  {item.name}
+                                </span>
+                                <p className="text-sm text-muted-foreground">
+                                  {item.description}
+                                </p>
+                              </Link>
+                            </NavigationMenuLink>
+                          </NavigationMenuLink>
+                        </NavigationMenuItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </>
+              ) : (
+                <Link className={navigationMenuTriggerStyle()} to={menu.to}>
+                  {menu.name}
+                </Link>
+              )}
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
