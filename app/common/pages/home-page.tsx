@@ -2,6 +2,7 @@ import { Link, type MetaFunction } from "react-router";
 import { ProductCard } from "../../features/products/components/product-card";
 import { PostCard } from "../../features/community/components/post-card";
 import { IdeaCard } from "../../features/ideas/components/idea-card";
+import { JobCard } from "../../features/jobs/components/job-card";
 import { Button } from "../components/ui/button";
 import {
   Card,
@@ -12,6 +13,7 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { DotIcon, EyeIcon, HeartIcon } from "lucide-react";
+import { Badge } from "../components/ui/badge";
 
 export const meta: MetaFunction = () => {
   return [
@@ -90,6 +92,32 @@ export default function HomePage() {
             postedAt="12 hours ago"
             likesCount={123}
             claimed={index % 2 === 0}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">
+            Latest Jobs
+          </h2>
+          <p className="text-xl font-light text-foreground">
+            Find your dream job.
+          </p>
+          <Button variant="link" asChild className="text-lg p-0">
+            <Link to="/jobs">Explore all jobs &rarr;</Link>
+          </Button>
+        </div>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <JobCard
+            id="jobId"
+            company="Tesla"
+            companyLogoUrl="https://github.com/facebook.png"
+            companyHq="San Francisco, CA"
+            title="Senior Software Engineer"
+            postedAt="12 hours ago"
+            type="Full-time"
+            positionLocation="Remote"
+            salary="$120,000 - $150,000"
           />
         ))}
       </div>
