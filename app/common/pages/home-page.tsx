@@ -1,7 +1,17 @@
 import { Link, type MetaFunction } from "react-router";
 import { ProductCard } from "../../features/products/components/product-card";
 import { PostCard } from "../../features/community/components/post-card";
+import { IdeaCard } from "../../features/ideas/components/idea-card";
 import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { DotIcon, EyeIcon, HeartIcon } from "lucide-react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -57,6 +67,29 @@ export default function HomePage() {
             authorAvatarUrl="https://github.com/apple.png"
             category="productivity"
             postedAt="12 hours ago"
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">
+            IdeasGPT
+          </h2>
+          <p className="text-xl font-light text-foreground">
+            Find ideas for your next project.
+          </p>
+          <Button variant="link" asChild className="text-lg p-0">
+            <Link to="/ideas">Explore all ideas &rarr;</Link>
+          </Button>
+        </div>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <IdeaCard
+            id="ideaId"
+            title="A startup that creates an AI-powered generated personal trainer, delivering customized fitness recommendations and tracking of progress using a mobile app to track workouts and progress as well as a website to manage the business."
+            viewsCount={123}
+            postedAt="12 hours ago"
+            likesCount={123}
+            claimed={index % 2 === 0}
           />
         ))}
       </div>
