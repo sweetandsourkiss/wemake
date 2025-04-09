@@ -35,7 +35,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {/* App or ErrorBoundary */}
-        {children}
+        <main className="px-20">{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
