@@ -5,6 +5,7 @@ import { IdeaCard } from "../../features/ideas/components/idea-card";
 import { JobCard } from "../../features/jobs/components/job-card";
 import { TeamCard } from "../../features/teams/components/team-card";
 import { Button } from "../components/ui/button";
+import type { Route } from "./+types/home-page";
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,14 +15,15 @@ export const meta: MetaFunction = () => {
 };
 
 /** run on the server side */
-export function loader() {
+export const loader = () => {
   console.log("hello");
   return {
     hello: "world",
+    hello2: "lalalal",
   };
-}
+};
 
-export default function HomePage({ loaderData }) {
+export default function HomePage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="px-20 space-y-40">
       <div className="grid grid-cols-3 gap-4">
