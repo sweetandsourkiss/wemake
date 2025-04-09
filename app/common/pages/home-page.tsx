@@ -5,17 +5,6 @@ import { IdeaCard } from "../../features/ideas/components/idea-card";
 import { JobCard } from "../../features/jobs/components/job-card";
 import { TeamCard } from "../../features/teams/components/team-card";
 import { Button } from "../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
-import { DotIcon, EyeIcon, HeartIcon } from "lucide-react";
-import { Badge } from "../components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 
 export const meta: MetaFunction = () => {
   return [
@@ -24,7 +13,15 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function HomePage() {
+/** run on the server side */
+export function loader() {
+  console.log("hello");
+  return {
+    hello: "world",
+  };
+}
+
+export default function HomePage({ loaderData }) {
   return (
     <div className="px-20 space-y-40">
       <div className="grid grid-cols-3 gap-4">
